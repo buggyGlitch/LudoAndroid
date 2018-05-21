@@ -2466,7 +2466,7 @@ var mainChain = function()
 
         game.load.image("splash","img/RooshSplash.png");
 
-        game.load.image('loaderBG', 'img/blackLine.png');
+        // game.load.image('loaderBG', 'img/blackLine.png');
 
         game.load.image("music_art","img/music.png");
         game.load.image("sfx_art","img/sfx.png");
@@ -2996,7 +2996,7 @@ function onDeviceReady() {
         selectDifficultyStatus=false;
     }
 
-    var loaderBG;
+    // var loaderBG;
 
     function create() 
     {
