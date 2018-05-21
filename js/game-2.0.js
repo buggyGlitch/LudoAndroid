@@ -213,6 +213,7 @@ var mainChain = function()
     //   console.log("JIO SDK :"+jioSDK);
 
         // console.log("VERSION :"+ jioSDK.version);
+        console.log("IS ANDROID :"+game.device.android);
       }
 
     function sendScore(val)
@@ -2465,6 +2466,8 @@ var mainChain = function()
 
         game.load.image("splash","img/RooshSplash.png");
 
+        game.load.image('loaderBG', 'img/blackLine.png');
+
         game.load.image("music_art","img/music.png");
         game.load.image("sfx_art","img/sfx.png");
         game.load.image("cancel","img/cancel.png");
@@ -2993,6 +2996,8 @@ function onDeviceReady() {
         selectDifficultyStatus=false;
     }
 
+    var loaderBG;
+
     function create() 
     {
 
@@ -3011,8 +3016,18 @@ function onDeviceReady() {
        game.scale.pageAlignHorizontally = true;
        game.scale.pageAlignVertically = true;
        game.scale.refresh();
+    //    var VisualTimer = require('path/to/VisualTimer');
 
- 
+    //    var indicator = new VisualTimer({
+    //     game: this.game,
+    //     x: 123,
+    //     y: 456,
+    //     seconds: 2,
+    //     onComplete: function() {
+    //         console.log("COMPLETED");
+    //     }
+    // });
+    // indicator.start();
        
 
        var offseter=70;
@@ -3932,9 +3947,9 @@ function onDeviceReady() {
 
        // splashBG=game.add.sprite(0,0,'splash');
         splashBG=game.add.sprite(canvasWidth/2 - cacheBG.width/2 , canvasHeight/2 -  cacheBG.height/2, 'splash');
-
+        // loaderBG=game.add.sprite(canvasWidth/2 - cacheBG.width/2 , canvasHeight/2 -  cacheBG.height/2, 'loaderBG');
        
-
+        // loaderBG=game.add.sprite(0,0,'loaderBG');
 
 
 
@@ -3954,7 +3969,8 @@ function onDeviceReady() {
 
 
        game.input.onTap.add(onTap, this);
-
+      // loaderBG
+      animLoader();
        debugText=game.add.text(0,0,'',{ fill: '#a36315' });
        var s ="ASPECT RATIO :"+ canvasWidth/canvasHeight + "::"+",WIDTH :"+canvasWidth +",HEIGHT :"+ canvasHeight;
        // console.log(canvasWidth)
@@ -3964,6 +3980,64 @@ function onDeviceReady() {
 
    
    }
+
+   var groupLoader;
+   var barBG,barFG,maxWidth,tween;
+
+    function animLoader()
+   {
+         
+            // var barGreen,barYellow,maxWidth,tween;
+
+            // barGreen = game.add.graphics(0,canvasHeight/2 + 200);
+            // barGreen.beginFill(0x000000);
+            // barGreen.drawRect(0,0,canvasWidth/2,50);
+
+            // barYellow = game.add.graphics(0,canvasHeight/2 + 200);
+            // barYellow.beginFill(0xFFFFFF);
+            // barYellow.drawRect(0,0,canvasWidth/2,50);
+
+            // // barGreen.anchor.setTo(0.5);
+            // // barYellow.anchor.setTo(0.5);
+
+            // maxWidth = 800;
+            // barYellow.width=0;
+            
+            // tween = game.add.tween(barYellow);
+            // tween.to({width:maxWidth},2000);
+            // tween.start();
+            maxWidth = 800;
+
+            
+            barSBG = game.add.graphics(canvasWidth/2-400,canvasHeight/2+390);
+            barSBG.beginFill("0x073d70");
+            barSBG.drawRect(0,0,maxWidth+10,30);
+
+            barBG = game.add.graphics(canvasWidth/2-400,canvasHeight/2+400);
+            barBG.beginFill(0xFFFFFF);
+            barBG.drawRect(0,0,maxWidth,10);
+
+            barFG = game.add.graphics(canvasWidth/2-400,canvasHeight/2+400);
+            barFG.beginFill("0x073d70");
+            barFG.drawRect(0,0,maxWidth,10);
+            
+            // barBG.lineStyle(2, "#a36315", 2);
+            // barBG.stroke = '#a36315';
+            // barBG.strokeThickness = 3;
+
+            barFG.width=0;
+            
+            tween = game.add.tween(barFG);
+            tween.to({width:maxWidth},1800);
+            tween.start();
+            groupLoader=game.add.group();
+            groupLoader.add(barSBG);
+            groupLoader.add(barBG);
+            groupLoader.add(barFG);
+
+
+ 
+    }
    
    function up() {
        console.log('button up', arguments);
@@ -4195,7 +4269,7 @@ function onDeviceReady() {
         menuDiceObj.x=45;
         menuDiceObj.y=175;
 
-        console.log("TOUCH :"+game.touch);
+        console.log("TOUCH :"+game.device.touch);
         
 
     }
@@ -4685,7 +4759,7 @@ function onDeviceReady() {
 
     function hasKey(key)
     {
-        //  return false;
+         //return false;
         if(localStorage.getItem(key))
         {
             return true;
@@ -4700,7 +4774,7 @@ function onDeviceReady() {
     {
         if(hasKey(key))
         {
-            return localStorage.getItem(key);
+            return parseInt( localStorage.getItem(key));
         }else{
             return 0;
         }
@@ -4709,7 +4783,7 @@ function onDeviceReady() {
 
     function setInt(key,value)
     {
-        //  return;
+        // return;
          localStorage.setItem(key,value);
       
     }
@@ -10725,6 +10799,9 @@ var testCtr=0;
                     console.log("Player Won");
                     isOver=true;
                     triggerGameOver(color);
+                    var oldWins=getInt("MyWins");
+                    sendScore(oldWins+1);
+                    setInt("MyWins",oldWins+1);
                 }
                 else if(getEnemyCur1()>=56 && getEnemyCur2()>=56 && getEnemyCur3()>=56 && getEnemyCur4()>=56)
                 {
@@ -10785,6 +10862,9 @@ var testCtr=0;
                     if(colorCounter==0)
                     {
                         console.log("Player 1 won");
+                        var oldWins=getInt("MyWins");
+                        sendScore(oldWins+1);
+                        setInt("MyWins",oldWins+1);
                         color=playerColor[0];
                         isOver=true;
                         triggerGameOver(color);
@@ -11599,6 +11679,8 @@ var testCtr=0;
         //{
         //  timer+=deltaTime;
         //}
+        // loaderBG .crop();
+        // console.log(loaderBG.crop.width );
 
         if(splashStatus)
         {
@@ -11616,7 +11698,7 @@ var testCtr=0;
                 document.body. style.backgroundSize ="cover"; //"100% 100%";
                 document.body. style.backgroundPosition = "center center";
 
-               
+                groupLoader.visible=false;
                 splashBG.visible=false;
                 splashStatus=false;
                 menuStatus=true;
