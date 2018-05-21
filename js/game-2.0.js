@@ -4685,7 +4685,7 @@ function onDeviceReady() {
 
     function hasKey(key)
     {
-        // return false;
+         return false;
         if(localStorage.getItem(key))
         {
             return true;
@@ -4709,7 +4709,7 @@ function onDeviceReady() {
 
     function setInt(key,value)
     {
-        // return;
+         return;
          localStorage.setItem(key,value);
       
     }
