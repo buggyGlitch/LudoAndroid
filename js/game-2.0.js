@@ -4770,6 +4770,14 @@ function onDeviceReady() {
 
         groupSettings.visible=false;
 
+        if(localStorage.getItem("sfxDisabled")==null)
+        {
+            localStorage.setItem("sfxDisabled",0);
+            localStorage.setItem("musicDisabled",0);
+
+        }
+        
+
         if(localStorage.getItem("sfxDisabled")==1)
         {
          //   localStorage.setItem("sfxDisabled",0);
