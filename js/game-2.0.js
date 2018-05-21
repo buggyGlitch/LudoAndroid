@@ -233,6 +233,8 @@ var mainChain = function()
 
     function showAds()
     {
+        // return;
+        // if(game)
         jioShowAd();
     }
 
@@ -2809,7 +2811,7 @@ function onDeviceReady() {
     {
 
         console.log("VS COMPUTER ");
-        showAds();
+        // showAds();
         //if(key==53)
         {
             modeStatus = false;
@@ -4683,7 +4685,7 @@ function onDeviceReady() {
 
     function hasKey(key)
     {
-        return false;
+        // return false;
         if(localStorage.getItem(key))
         {
             return true;
@@ -4707,7 +4709,7 @@ function onDeviceReady() {
 
     function setInt(key,value)
     {
-        return;
+        // return;
          localStorage.setItem(key,value);
       
     }
@@ -6086,51 +6088,51 @@ function onDeviceReady() {
 
         if(gameModeType==1) //PLAYER VS PLAYER
         {
-//             if(getColor()==1)
-//             {
-//                 textRedObj.text="PLAYER 1";
-//                 textRedObj.x-= getXtoken(20);
+            if(getColor()==1)
+            {
+                textRedObj.text="PLAYER 1";
+                // textRedObj.x-= getXtoken(20);
 
-//                 textYellowObj.text="PLAYER 2";
-//                 textYellowObj.x+=getXtoken(10);
-//                // textRedObj.x-=23;
+                textYellowObj.text="PLAYER 2";
+                // textYellowObj.x+=getXtoken(10);
+               // textRedObj.x-=23;
 
-//                redPointerTextObj.text="P1";
-//                yellowPointerTextObj.text="P2";
+            //    redPointerTextObj.text="P1";
+            //    yellowPointerTextObj.text="P2";
       
-//             }
-//             else if(getColor()==2){
-//                 textYellowObj.text="PLAYER 1";
-//                 textYellowObj.x-= getXtoken (20);
-//  //               textRedObj.x-=23;
-//                  textRedObj.text="PLAYER 2";
-//                  textRedObj.x+= getXtoken (10);
+            }
+            else if(getColor()==2){
+                textYellowObj.text="PLAYER 1";
+               // textYellowObj.x-= getXtoken (20);
+ //               textRedObj.x-=23;
+                 textRedObj.text="PLAYER 2";
+                //  textRedObj.x+= getXtoken (10);
 
 
-//                redPointerTextObj.text="P2";
-//                yellowPointerTextObj.text="P1";
+            //    redPointerTextObj.text="P2";
+            //    yellowPointerTextObj.text="P1";
               
-//             }else if(getColor()==3){
-//                 textGreenObj.text="PLAYER 1";
-//                 textGreenObj.x-= getXtoken (15);
+            }else if(getColor()==3){
+                textGreenObj.text="PLAYER 1";
+                // textGreenObj.x-= getXtoken (15);
 
-//                 textBlueObj.text="PLAYER 2";
-// //                textBlueObj.x+=23;
+                textBlueObj.text="PLAYER 2";
+//                textBlueObj.x+=23;
 
 
-//                bluePointerTextObj.text="P2";
-//                greenPointerTextObj.text="P1";
+            //    bluePointerTextObj.text="P2";
+            //    greenPointerTextObj.text="P1";
 
-//             }else if(getColor()==4){
-//                 textBlueObj.text="PLAYER 1";
-//                 textBlueObj.x-= getXtoken (20);
+            }else if(getColor()==4){
+                textBlueObj.text="PLAYER 1";
+                // textBlueObj.x-= getXtoken (20);
 
-//                 textGreenObj.x+= getXtoken (3);
-//                 textGreenObj.text="PLAYER 2";
+                // textGreenObj.x+= getXtoken (3);
+                textGreenObj.text="PLAYER 2";
 
-//                 bluePointerTextObj.text="P1";
-//                 greenPointerTextObj.text="P2";
-//             }
+                // bluePointerTextObj.text="P1";
+                // greenPointerTextObj.text="P2";
+            }
         }
 
 
