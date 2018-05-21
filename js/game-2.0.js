@@ -4681,6 +4681,34 @@ function onDeviceReady() {
 
   //  var 
 
+    function hasKey(key)
+    {
+        if(localStorage.getItem(key))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    function getInt(key)
+    {
+        if(hasKey(key))
+        {
+            return localStorage.getItem(key);
+        }else{
+            return 0;
+        }
+      
+    }
+
+    function setInt(key,value)
+    {
+         localStorage.setItem(key,value);
+      
+    }
 
     function initSetting()
     {
@@ -4770,40 +4798,37 @@ function onDeviceReady() {
 
         groupSettings.visible=false;
 
-        if(window.localStorage.getItem("sfxDisabled")==null)
+        if(!hasKey("sfxDisabled"))
         {
-            console.log("NO window.localStorage");
+             setInt("sfxDisabled",0);
+            setInt("musicDisabled",0);
 
-            window.localStorage.setItem("sfxDisabled",0);
-            window.localStorage.setItem("musicDisabled",0);
+            console.log("NO LOCAL STORAGE");
+
 
         }else{
             console.log("YES LOCAL STORAGE");
         }
         
 
-        if(window.localStorage.getItem("sfxDisabled")==1)
+        if(getInt("sfxDisabled")==1)
         {
-         //   window.localStorage.setItem("sfxDisabled",0);
-         isSfxActive=false;
+          isSfxActive=false;
          cancelSfx.visible=true;
         }else{
-         //   window.localStorage.setItem("sfxDisabled",0);
-         isSfxActive=true;
+          isSfxActive=true;
          cancelSfx.visible=false;
 
 
         }
 
 
-        if(window.localStorage.getItem("musicDisabled")==1)
+        if(getInt("musicDisabled")==1)
         {
-         //   window.localStorage.setItem("sfxDisabled",0);
-         isMusicActive=false;
+          isMusicActive=false;
          cancelMiusic.visible=true;
         }else{
-         //   window.localStorage.setItem("sfxDisabled",0);
-         isMusicActive=true;
+          isMusicActive=true;
          cancelMiusic.visible=false;
 
 
@@ -4816,7 +4841,7 @@ function onDeviceReady() {
         {
             isMusicActive=false;
             cancelMiusic.visible=true;
-            window.localStorage.setItem("musicDisabled",1);
+            setInt("musicDisabled",1);
         }
         else
         {
@@ -4824,7 +4849,7 @@ function onDeviceReady() {
             cancelMiusic.visible=false;
             changeBgMusic(false);
 
-            window.localStorage.setItem("musicDisabled",0);
+            setInt("musicDisabled",0);
 
         }
     }
@@ -4836,14 +4861,14 @@ function onDeviceReady() {
         {
             isSfxActive=false;
             cancelSfx.visible=true;
-            window.localStorage.setItem("sfxDisabled",1);
+            setInt("sfxDisabled",1);
 
         }
         else
         {
             isSfxActive=true;
             cancelSfx.visible=false;
-            window.localStorage.setItem("sfxDisabled",0);
+            setInt("sfxDisabled",0);
 
 
         }
