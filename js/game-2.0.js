@@ -4683,6 +4683,7 @@ function onDeviceReady() {
 
     function hasKey(key)
     {
+        return false;
         if(localStorage.getItem(key))
         {
             return true;
@@ -4706,6 +4707,7 @@ function onDeviceReady() {
 
     function setInt(key,value)
     {
+        return;
          localStorage.setItem(key,value);
       
     }
@@ -4800,7 +4802,7 @@ function onDeviceReady() {
 
         if(!hasKey("sfxDisabled"))
         {
-             setInt("sfxDisabled",0);
+            setInt("sfxDisabled",0);
             setInt("musicDisabled",0);
 
             console.log("NO LOCAL STORAGE");
