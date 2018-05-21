@@ -4772,9 +4772,13 @@ function onDeviceReady() {
 
         if(localStorage.getItem("sfxDisabled")==null)
         {
+            console.log("NO LOCALSTORAGE");
+
             localStorage.setItem("sfxDisabled",0);
             localStorage.setItem("musicDisabled",0);
 
+        }else{
+            console.log("YES LOCAL STORAGE");
         }
         
 
