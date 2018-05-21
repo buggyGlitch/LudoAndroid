@@ -4843,13 +4843,14 @@ function onDeviceReady() {
         {
             isMusicActive=false;
             cancelMiusic.visible=true;
+            stopBGMusic();
             setInt("musicDisabled",1);
         }
         else
         {
             isMusicActive=true;
             cancelMiusic.visible=false;
-            changeBgMusic(false);
+            changeBgMusic(true);
 
             setInt("musicDisabled",0);
 
