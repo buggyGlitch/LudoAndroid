@@ -2814,7 +2814,7 @@ function onDeviceReady() {
         //if(key==52)
         {
           console.log("VS PLAYER ");
-          showAds();
+        //   showAds();
 
           selectNoOfPlayerStatus=true;
           modeStatus=false;
