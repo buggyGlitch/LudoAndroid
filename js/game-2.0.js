@@ -206,36 +206,42 @@ var mainChain = function()
     function initSDK()
      {
         //  console.log("JIO SDK :"+jioSDK);
+        // if(!game.device.android)
+        // return;
+
         jioSDK = new Jiogames();
         jioSDK.myAdspotkey = "7f877c43"; // The adspot key shared
         jioSDK.myGameSource = "com.jio.jiogames";// The package name of your game
     //   console.log("CALLED INIT");
     //   console.log("JIO SDK :"+jioSDK);
 
-        // console.log("VERSION :"+ jioSDK.version);
+         console.log("VERSION :"+ jioSDK.version);
         console.log("IS ANDROID :"+game.device.android);
       }
 
     function sendScore(val)
     {
+        // if(game.device.android)
         jioSDK.postScore(val);
     }
  
     function jioCacheAd()
     {
+        // if(game.device.android)
         jioSDK.cacheAd(jioSDK.myAdspotkey, jioSDK.myGameSource);
     }
 
     function jioShowAd()
     {
         //return;
+        // if(game.device.android)
         jioSDK.showAd(jioSDK.myAdspotkey, jioSDK.myGameSource);
     }
 
     function showAds()
     {
         // return;
-        // if(game)
+        // if(game.device.android)
         jioShowAd();
     }
 
@@ -1907,6 +1913,8 @@ var mainChain = function()
      //mainbg;
     var boardBG;
 
+    var inGameTitleBG;
+
 
 
     
@@ -1956,6 +1964,10 @@ var mainChain = function()
     function hideForPause()
     {
         boardBG.visible=false;
+        inGameTitleBG.visible=false;
+
+        inGameTitleBG.visible=false;
+        console.log("DEACTIVE HERE");
 
         titleBG.visible=true;
         titleCupBG.visible=true;
@@ -2049,7 +2061,6 @@ var mainChain = function()
                     dockActiveBeforePause[i]=true;
                 }else{
                     dockActiveBeforePause[i]=false;
-
                 }
             }
 
@@ -2063,6 +2074,7 @@ var mainChain = function()
     function showAfterPause()
     {
         boardBG.visible=true;
+        inGameTitleBG.visible=true;
 
         titleBG.visible=false;
         titleCupBG.visible=false;
@@ -2158,6 +2170,11 @@ var mainChain = function()
         modeBGactive(false);
        //  inGameBG.visible=false;
         boardBG.visible=false;
+        inGameTitleBG.visible=false;
+
+       // inGameTitleBG.visible=false;
+        //console.log("DEACTIVE HERE");
+
 
         titleBG.visible=true;
         titleCupBG.visible=true;
@@ -2245,6 +2262,11 @@ var mainChain = function()
       introBGactive(true);
      // inGameBG.visible=false;
         boardBG.visible=false;
+        inGameTitleBG.visible=false;
+
+       // inGameTitleBG.visible=false;
+       // console.log("DEACTIVE HERE");
+
 
         titleBG.visible=true;
         titleCupBG.visible=true;
@@ -2792,6 +2814,7 @@ function onDeviceReady() {
         //if(key==52)
         {
           console.log("VS PLAYER ");
+          showAds();
 
           selectNoOfPlayerStatus=true;
           modeStatus=false;
@@ -2885,6 +2908,7 @@ function onDeviceReady() {
               markerSelectActive(false);
             // inGameBG.visible=true;
              boardBG.visible=true;
+             inGameTitleBG.visible=true;
 
              titleBG.visible=false;
             titleCupBG.visible=false;
@@ -3698,7 +3722,7 @@ function onDeviceReady() {
 
         var allDiceImgs=[redDice1,redDice2,redDice3,redDiceBase,yellowDice1,yellowDice2,yellowDice3,yellowDiceBase,greenDice1,greenDice2,greenDice3,greenDiceBase,blueDice1,blueDice2,blueDice3,blueDiceBase,diceDot1,diceDot2,diceDot3,diceDot4,diceDot5,diceDot6];
 
-        var diceScale=0.4;
+        var diceScale=0.5;
         for(var i=0;i<allDiceImgs.length;i++)
         {
             allDiceImgs[i].anchor.setTo(0.5);
@@ -3828,9 +3852,14 @@ function onDeviceReady() {
         titleCupBG=game.add.sprite(800,500, 'titleCupBG'); //y:500
         titleCupBG.anchor.setTo(0.5,0.5);
         titleCupBG.angle=-5;
+
         titleBG=game.add.sprite(canvasWidth/2,canvasHeight/2 - 300, 'titleBG');
         titleBG.anchor.setTo(0.5);
         titleBG.scale.setTo(0.8,0.8);
+
+        inGameTitleBG=game.add.sprite(canvasWidth/2,50, 'titleBG');
+        inGameTitleBG.anchor.setTo(0.5);
+        inGameTitleBG.scale.setTo(0.45,0.45);
          
 
 
@@ -5610,6 +5639,9 @@ function onDeviceReady() {
          titleBG.visible=false;
          titleCupBG.visible=false;
 
+         inGameTitleBG.visible=true;
+         console.log("ACTIVE HERE");
+
          gameStatus=true;
 
 
@@ -6505,6 +6537,7 @@ function onDeviceReady() {
         playButtonImg.visible=false;
         groupPause.visible=true;
         changeDiceColor(getColor());
+        inGameTitleBG.visible=true;
       //  diceBase.visible=false;
         initCirclePos();
         initRoll();
@@ -7393,6 +7426,8 @@ function onDeviceReady() {
          markerSelectActive(false);
        // inGameBG.visible=true;
         boardBG.visible=true;
+        inGameTitleBG.visible=true;
+
         titleBG.visible=false;
         titleCupBG.visible=false;
 
@@ -11833,6 +11868,8 @@ var testCtr=0;
                       markerSelectActive(false);
                     // inGameBG.visible=true;
                      boardBG.visible=true;
+                     inGameTitleBG.visible=true;
+
                      titleBG.visible=false;
                      titleCupBG.visible=false;
                      gameStatus=true;
@@ -11937,6 +11974,8 @@ var testCtr=0;
                titleBG.visible=false;
                titleCupBG.visible=false;
                 boardBG.visible=true;
+                inGameTitleBG.visible=true;
+
                 gameStatus=true;
 
                 setDiceRolledStatus(false);
