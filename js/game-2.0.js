@@ -222,13 +222,26 @@ var mainChain = function()
     function sendScore(val)
     {
         // if(game.device.android)
+        try{
         jioSDK.postScore(val);
+        }
+        catch(error)
+        {
+            console.log("send score error :"+error);
+        }
     }
  
     function jioCacheAd()
     {
         // if(game.device.android)
-        jioSDK.cacheAd(jioSDK.myAdspotkey, jioSDK.myGameSource);
+        try
+        {
+            jioSDK.cacheAd(jioSDK.myAdspotkey, jioSDK.myGameSource);
+        }
+        catch(error)
+        {
+            console.log("cache ad error :"+error);
+        }
     }
 
     function jioShowAd()
@@ -247,7 +260,7 @@ var mainChain = function()
 
     function showAds()
     {
-        // return;
+        //  return;
         // if(game.device.android)
         jioShowAd();
     }
@@ -1151,22 +1164,36 @@ var mainChain = function()
             //console.log("HERE");
             if(redAdjustedOnce.includes(1)==false && redOverLapping.includes(1)==false)
             {
-            if(red1curr>=0 && red1curr<=56)
-            {
-             
+                if(red1curr>=0 && red1curr<=56)
+                {
+                
 
-               if(red1curr==0)
-               {
-                game.add.tween(red1).to( { x:redNodeX[red1curr] ,y: redNodeY[red1curr] }, 500, Phaser.Easing.Quadratic.Out,100);
-                game.add.tween(red1BlackCircle).to( { x:redNodeX[red1curr] ,y: redNodeY[red1curr] +40}, 500, Phaser.Easing.Quadratic.Out,100);
-                game.add.tween(red1Circle).to( { x:redNodeX[red1curr] ,y: redNodeY[red1curr] +40}, 500, Phaser.Easing.Quadratic.Out,100);
+                    if(red1curr==0 && !animateKillStatus)
+                    {
+                        game.add.tween(red1).to( { x:redNodeX[red1curr] ,y: redNodeY[red1curr] }, 500, Phaser.Easing.Quadratic.Out,100);
+                        game.add.tween(red1BlackCircle).to( { x:redNodeX[red1curr] ,y: redNodeY[red1curr] +40}, 500, Phaser.Easing.Quadratic.Out,100);
+                        game.add.tween(red1Circle).to( { x:redNodeX[red1curr] ,y: redNodeY[red1curr] +40}, 500, Phaser.Easing.Quadratic.Out,100);
 
-               }
-             else{
-                red1.x= ( redNodeX[red1curr]);
-                red1.y= (redNodeY[red1curr]);
-             }
-            }
+                        // red1.x= (redNodeX[red1curr]);
+                        // red1.y= (redNodeY[red1curr]);
+                    }
+                    else
+                    {
+                        // console.log("RED 1 curr :"+red1curr);
+                        red1.x= (redNodeX[red1curr]);
+                        red1.y= (redNodeY[red1curr]);
+                    }
+                }
+                // if(red1curr==-1)
+                // {
+                   
+                //     game.add.tween(red1).to( { x:getXtoken(35) ,y: getYtoken(213-yOffseter1) }, 500, Phaser.Easing.Quadratic.Out,100);
+                //     game.add.tween(red1BlackCircle).to( { x:getXtoken(35) ,y: getYtoken(213-yOffseter1) +40}, 500, Phaser.Easing.Quadratic.Out,100);
+                //     game.add.tween(red1Circle).to( { x:getXtoken(35),y: getYtoken(213-yOffseter1)+40}, 500, Phaser.Easing.Quadratic.Out,100);
+
+                     
+                // }
+
             }
              
             if(redAdjustedOnce.includes(2)==false && redOverLapping.includes(2)==false){
@@ -1191,7 +1218,7 @@ var mainChain = function()
             if(redAdjustedOnce.includes(3)==false && redOverLapping.includes(3)==false)  {
                 if(red3curr>=0 && red3curr<=56)
                 {
-                    if(red3curr==0)
+                    if(red3curr==0 && !animateKillStatus)
                     {
                         game.add.tween(red3).to( { x:redNodeX[red3curr] ,y: redNodeY[red3curr] }, 500, Phaser.Easing.Quadratic.Out,100);
                         game.add.tween(red3BlackCircle).to( { x:redNodeX[red3curr] ,y: redNodeY[red3curr] +40}, 500, Phaser.Easing.Quadratic.Out,100);
@@ -1212,7 +1239,7 @@ var mainChain = function()
             if(redAdjustedOnce.includes(4)==false && redOverLapping.includes(4)==false){
                 if(red4curr>=0 && red4curr<=56)
                 {
-                    if(red4curr==0)
+                    if(red4curr==0 && !animateKillStatus)
                     {
                         game.add.tween(red4).to( { x:redNodeX[red4curr] ,y: redNodeY[red4curr] }, 500, Phaser.Easing.Quadratic.Out,100);
                         game.add.tween(red4BlackCircle).to( { x:redNodeX[red4curr] ,y: redNodeY[red4curr] +40}, 500, Phaser.Easing.Quadratic.Out,100);
@@ -1298,7 +1325,7 @@ var mainChain = function()
             if(yellowAdjustedOnce.includes(1)==false) 
             if(yellow1curr>=0 && yellow1curr<=56)
             {
-                if(yellow1curr==0)
+                if(yellow1curr==0 && !animateKillStatus)
                 {
                     game.add.tween(yellow1).to( { x:yellowNodeX[yellow1curr] ,y: yellowNodeY[yellow1curr] }, 500, Phaser.Easing.Quadratic.Out,100);
                     game.add.tween(yellow1BlackCircle).to( { x:yellowNodeX[yellow1curr] ,y: yellowNodeY[yellow1curr] +40}, 500, Phaser.Easing.Quadratic.Out,100);
@@ -1317,7 +1344,7 @@ var mainChain = function()
             if(yellowAdjustedOnce.includes(2)==false) 
             if(yellow2curr>=0 && yellow2curr<=56)
             {
-                if(yellow2curr==0)
+                if(yellow2curr==0 && !animateKillStatus)
                 {
                     game.add.tween(yellow2).to( { x:yellowNodeX[yellow2curr] ,y: yellowNodeY[yellow2curr] }, 500, Phaser.Easing.Quadratic.Out,100);
                     game.add.tween(yellow2BlackCircle).to( { x:yellowNodeX[yellow2curr] ,y: yellowNodeY[yellow2curr] +40}, 500, Phaser.Easing.Quadratic.Out,100);
@@ -1335,7 +1362,7 @@ var mainChain = function()
             if(yellowAdjustedOnce.includes(3)==false) 
             if(yellow3curr>=0 && yellow3curr<=56)
             {
-                if(yellow3curr==0)
+                if(yellow3curr==0  && !animateKillStatus)
                 {
                     game.add.tween(yellow3).to( { x:yellowNodeX[yellow3curr] ,y: yellowNodeY[yellow3curr] }, 500, Phaser.Easing.Quadratic.Out,100);
                     game.add.tween(yellow3BlackCircle).to( { x:yellowNodeX[yellow3curr] ,y: yellowNodeY[yellow3curr] +40}, 500, Phaser.Easing.Quadratic.Out,100);
@@ -1351,7 +1378,7 @@ var mainChain = function()
             if(yellowAdjustedOnce.includes(4)==false) 
             if(yellow4curr>=0 && yellow4curr<=56)
             {
-                if(yellow4curr==0)
+                if(yellow4curr==0  && !animateKillStatus)
                 {
                     game.add.tween(yellow4).to( { x:yellowNodeX[yellow4curr] ,y: yellowNodeY[yellow4curr] }, 500, Phaser.Easing.Quadratic.Out,100);
                     game.add.tween(yellow4BlackCircle).to( { x:yellowNodeX[yellow4curr] ,y: yellowNodeY[yellow4curr] +40}, 500, Phaser.Easing.Quadratic.Out,100);
@@ -1430,7 +1457,8 @@ var mainChain = function()
             if(greenAdjustedOnce.includes(1)==false) 
             if(green1curr>=0 && green1curr<=56)
             {
-                if(green1curr==0)
+                // console.log("IN CAL OFFSETS 1");
+                if(green1curr==0 && !animateKillStatus)
                 {
                  //   console.log("1");
                     game.add.tween(green1).to( { x:greenNodeX[green1curr] ,y: greenNodeY[green1curr] }, 500, Phaser.Easing.Quadratic.Out,100);
@@ -1448,7 +1476,9 @@ var mainChain = function()
             if(greenAdjustedOnce.includes(2)==false) 
             if(green2curr>=0 && green2curr<=56)
             {
-                if(green2curr==0)
+                // console.log("IN CAL OFFSETS 2");
+
+                if(green2curr==0  && !animateKillStatus)
                 {
                //     console.log("2");
 
@@ -1467,7 +1497,9 @@ var mainChain = function()
             if(greenAdjustedOnce.includes(3)==false) 
             if(green3curr>=0 && green3curr<=56)
             {
-                if(green3curr==0)
+                // console.log("IN CAL OFFSETS 3");
+
+                if(green3curr==0  && !animateKillStatus)
                 {
              //       console.log("3");
 
@@ -1486,7 +1518,9 @@ var mainChain = function()
             if(greenAdjustedOnce.includes(4)==false) 
             if(green4curr>=0 && green4curr<=56)
             {
-                if(green4curr==0)
+                // console.log("IN CAL OFFSETS 4");
+
+                if(green4curr==0  && !animateKillStatus)
                 {
                  //   console.log("4");
 
@@ -1571,7 +1605,7 @@ var mainChain = function()
             {
                 if(blue1curr>=0 && blue1curr<=56)
                 {
-                    if(blue1curr==0)
+                    if(blue1curr==0  && !animateKillStatus)
                     {
                         game.add.tween(blue1).to( { x:blueNodeX[blue1curr] ,y: blueNodeY[blue1curr] }, 500, Phaser.Easing.Quadratic.Out,100);
                         game.add.tween(blue1BlackCircle).to( { x:blueNodeX[blue1curr] ,y: blueNodeY[blue1curr] +40}, 500, Phaser.Easing.Quadratic.Out,100);
@@ -1593,7 +1627,7 @@ var mainChain = function()
             {
                 if(blue2curr>=0 && blue2curr<=56)
                 {
-                    if(blue2curr==0)
+                    if(blue2curr==0  && !animateKillStatus)
                     {
                         game.add.tween(blue2).to( { x:blueNodeX[blue2curr] ,y: blueNodeY[blue2curr] }, 500, Phaser.Easing.Quadratic.Out,100);
                         game.add.tween(blue2BlackCircle).to( { x:blueNodeX[blue2curr] ,y: blueNodeY[blue2curr] +40}, 500, Phaser.Easing.Quadratic.Out,100);
@@ -1614,7 +1648,7 @@ var mainChain = function()
             {
                 if(blue3curr>=0 && blue3curr<=56)
                 {
-                    if(blue3curr==0)
+                    if(blue3curr==0  && !animateKillStatus)
                     {
                         game.add.tween(blue3).to( { x:blueNodeX[blue3curr] ,y: blueNodeY[blue3curr] }, 500, Phaser.Easing.Quadratic.Out,100);
                         game.add.tween(blue3BlackCircle).to( { x:blueNodeX[blue3curr] ,y: blueNodeY[blue3curr] +40}, 500, Phaser.Easing.Quadratic.Out,100);
@@ -1635,7 +1669,7 @@ var mainChain = function()
             {
                 if(blue4curr>=0 && blue4curr<=56)
                 {
-                    if(blue4curr==0)
+                    if(blue4curr==0  && !animateKillStatus)
                     {
                         game.add.tween(blue4).to( { x:blueNodeX[blue4curr] ,y: blueNodeY[blue4curr] }, 500, Phaser.Easing.Quadratic.Out,100);
                         game.add.tween(blue4BlackCircle).to( { x:blueNodeX[blue4curr] ,y: blueNodeY[blue4curr] +40}, 500, Phaser.Easing.Quadratic.Out,100);
@@ -2771,21 +2805,22 @@ function onDeviceReady() {
 
     function handleBack()
     {
-            if(menuStatus==true)
-            {          
+            // if(menuStatus==true)
+            // {          
 
-                // console.log("HERE 1");
+            //     console.log("HERE 1");
 
-            }
-            else if(modeStatus==true)
-            {
+            // }
+            // else if(modeStatus==true)
+            // {
 
-                // console.log("HERE 2");
+            //      console.log("HERE 2");
 
-            }
-            else if(selectNoOfPlayerStatus)
+            // }
+            // else 
+            if(selectNoOfPlayerStatus)
             { 
-               // console.log("HERE 3");
+                console.log("HERE 3");
                showButtons();
 
                selectNoOfPlayerStatus=false;
@@ -2800,7 +2835,7 @@ function onDeviceReady() {
             else if(selectDifficultyStatus)
             {
                
-                // console.log("HERE 4");
+                 console.log("HERE 4");
                 selectDifficultyStatus=false;
                 selectNoOfPlayerStatus=true;
                 modeStatus=false;
@@ -2814,7 +2849,7 @@ function onDeviceReady() {
             }
             else if(selectColorStatus==true)
             {
-                // console.log("HERE 5 vs AI"+gameModevsAI);
+                 console.log("HERE 5 vs AI"+gameModevsAI);
                 if(gameModevsAI)
                 {
                     selectColorStatus=false;
@@ -2835,6 +2870,8 @@ function onDeviceReady() {
 
     function handleVsPlayer()
     {
+        if(splashStatus)
+        return;
         //if(key==52)
         {
           console.log("VS PLAYER ");
@@ -2860,6 +2897,8 @@ function onDeviceReady() {
     function handleVsComputer()
     {
 
+        if(splashStatus)
+        return;
         console.log("VS COMPUTER ");
         // showAds();
         //if(key==53)
@@ -5037,6 +5076,9 @@ function onDeviceReady() {
 
     function handleSetting()
     {
+        if(splashStatus)
+        return;
+
         if(showingSetting)
         {
              
@@ -5992,6 +6034,19 @@ function onDeviceReady() {
         red4Circle.y=red4.y+40;
 
 
+        yellow1.x=getXtoken(170+5);
+        yellow1.y=getYtoken(108-yOffseter1);
+
+        yellow2.x=getXtoken(200+5);
+        yellow2.y=getYtoken(108-yOffseter1);
+
+        yellow3.x=getXtoken(170+5);
+        yellow3.y=getYtoken(130-yOffseter1);
+
+        yellow4.x=getXtoken(200+5);
+        yellow4.y=getYtoken(130-yOffseter1);
+
+
         blue1.x=getXtoken(170+5);
         blue1.y=getYtoken(213-yOffseter1);
 
@@ -6004,6 +6059,8 @@ function onDeviceReady() {
         blue4.x=getXtoken(200+5);
         blue4.y=getYtoken(240-yOffseter2);
 
+        // yOffseter1=16;
+        // yOffseter2=20;
 
         
         green1.x=getXtoken(35);
@@ -6020,17 +6077,6 @@ function onDeviceReady() {
 
 
 
-        yellow1.x=getXtoken(170+5);
-        yellow1.y=getYtoken(108-yOffseter1);
-
-        yellow2.x=getXtoken(200+5);
-        yellow2.y=getYtoken(108-yOffseter1);
-
-        yellow3.x=getXtoken(170+5);
-        yellow3.y=getYtoken(130-yOffseter1);
-
-        yellow4.x=getXtoken(200+5);
-        yellow4.y=getYtoken(130-yOffseter1);
 
 
      
@@ -8474,9 +8520,31 @@ function onDeviceReady() {
         //console.log("KILLCOLOR :"+killColor);
         var color=killColor;
         var tokenNo=killTokenNo;
-         
+
+        var yOffseter1=16;
+        var yOffseter2=20;
+
         hideBG();
         tempCurr=0;
+
+ 
+        
+       
+
+       
+
+     
+
+      
+
+
+
+      
+
+       
+
+       
+
          //console.log("COLOR  : "+color+"::"+"Token no"+killTokenNo);
         if(color==1) //Red
         {
@@ -8498,8 +8566,9 @@ function onDeviceReady() {
                 {
 
                         
+                    
                     red1.x= getXtoken(35);
-                    red1.y= getYtoken(213-14);
+                    red1.y= getYtoken(213-yOffseter1);
             
                     red1curr=-1;
                     animateKillStatus=false;
@@ -8520,7 +8589,7 @@ function onDeviceReady() {
 
                    
                     red2.x=getXtoken(64);
-                    red2.y=getYtoken(213-14);
+                    red2.y=getYtoken(213-yOffseter1);
 
                     red2curr=-1;
                     animateKillStatus=false;
@@ -8536,12 +8605,13 @@ function onDeviceReady() {
 
                  if(tempCurr>=0)
                  {
-                    red3.x=getXtoken(35);
-                    red3.y=getYtoken(240-18);
+                    red3.x= (redNodeX[red3curr]);
+                    red3.y= (redNodeY[red3curr]);
                   
                  }else{
-                    red3.x=getXtoken(35-8);
-                    red3.y=getYtoken(240-14);
+                    
+                    red3.x=getXtoken(35);
+                    red3.y=getYtoken(240-yOffseter2);
                     red3curr=-1;
                     animateKillStatus=false;
                  }
@@ -8562,7 +8632,7 @@ function onDeviceReady() {
                  }else{
 
                     red4.x=getXtoken(64);
-                    red4.y=getYtoken(240-18);
+                   red4.y=getYtoken(240-yOffseter2);
                     red4curr=-1;
                    animateKillStatus=false;
                  }
@@ -8595,8 +8665,8 @@ function onDeviceReady() {
                 else
                 {
                    
-                        yellow1.x=getXtoken(170+5);
-                        yellow1.y=getYtoken(80+14);
+                    yellow1.x=getXtoken(170+5);
+                    yellow1.y=getYtoken(108-yOffseter1);
                      animateKillStatus=false;
                      yellow1curr=-1;
                 }
@@ -8614,8 +8684,8 @@ function onDeviceReady() {
                 }
                 else
                 {
-                     yellow2.x=getXtoken(200+5);
-                     yellow2.y=getYtoken(80+14);
+                    yellow2.x=getXtoken(200+5);
+                    yellow2.y=getYtoken(108-yOffseter1);
                     yellow2curr=-1;
                     animateKillStatus=false;
                 }
@@ -8635,7 +8705,7 @@ function onDeviceReady() {
 
                  
                   yellow3.x=getXtoken(170+5);
-                  yellow3.y=getYtoken(130-14);
+                  yellow3.y=getYtoken(130-yOffseter1);
 
                     yellow3curr=-1;
                     animateKillStatus=false;
@@ -8655,7 +8725,7 @@ function onDeviceReady() {
                  
                  }else{
                     yellow4.x=getXtoken(200+5);
-                    yellow4.y=getYtoken(130-14);
+                    yellow4.y=getYtoken(130-yOffseter1);
                     yellow4curr=-1;
                     animateKillStatus=false;
                  }
@@ -8667,6 +8737,8 @@ function onDeviceReady() {
         }
         if(color==3) //GREEN
         {
+
+
             switch(tokenNo)
             {
                 case 1:
@@ -8683,7 +8755,9 @@ function onDeviceReady() {
                     
                 }else{
                     green1.x=getXtoken(35);
-                    green1.y=getYtoken(80+14);
+                    green1.y=getYtoken(108-yOffseter1);
+                    console.log("IN ANIMATE KILL 1");
+
                     green1curr=-1;
                     animateKillStatus=false;
                 }
@@ -8696,10 +8770,12 @@ function onDeviceReady() {
                 tempCurr=green2curr;
                 if(tempCurr>=0){
                     green2.x=  (greenNodeX[green2curr]);
-                green2.y= (greenNodeY[green2curr]);
+                     green2.y= (greenNodeY[green2curr]);
                 }else{
                     green2.x=getXtoken(64);
-                    green2.y=getYtoken(80+14);
+                     green2.y=getYtoken(108-yOffseter1);
+                     console.log("IN ANIMATE KILL 2");
+
             
                     green2curr=-1;
                     animateKillStatus=false;
@@ -8716,7 +8792,9 @@ function onDeviceReady() {
                     green3.y= (greenNodeY[green3curr]);
                  }else{
                     green3.x=getXtoken(35);
-                    green3.y=getYtoken(130-14);
+                    green3.y=getYtoken(130-yOffseter1);
+                    console.log("IN ANIMATE KILL 3");
+
                     green3curr=-1;
                     animateKillStatus=false;
                  }
@@ -8731,10 +8809,13 @@ function onDeviceReady() {
                     green4.x= (greenNodeX[green4curr]);
                     green4.y= (greenNodeY[green4curr]);
                    
-                }else{
+                }
+                else
+                {
                     green4.x=getXtoken(64);
-                    green4.y=getYtoken(130-14); 
-            
+                    green4.y=getYtoken(130-yOffseter1); 
+                    console.log("IN ANIMATE KILL 4");
+
                     green4curr=-1;
                     animateKillStatus=false;
                 }
@@ -8746,6 +8827,10 @@ function onDeviceReady() {
         }
         if(color==4) //BLUE
         {
+          
+    
+    
+
             switch(tokenNo)
             {
                 case 1:
@@ -8761,7 +8846,7 @@ function onDeviceReady() {
                     
 
                     blue1.x=getXtoken(170+5);
-                    blue1.y=getYtoken(213-14);
+                    blue1.y=getYtoken(213-yOffseter1);
 
                     blue1curr=-1;
                     animateKillStatus=false;
@@ -8780,7 +8865,8 @@ function onDeviceReady() {
                    
 
                     blue2.x=getXtoken(200+5);
-                    blue2.y=getYtoken(213-14);
+                     blue2.y=getYtoken(213-yOffseter1);
+
                     blue2curr=-1;
                     animateKillStatus=false;
                 }
@@ -8799,7 +8885,7 @@ function onDeviceReady() {
                  }else{
                   
                     blue3.x=getXtoken(170+5);
-                    blue3.y=getYtoken(240-18);
+                    blue3.y=getYtoken(240-yOffseter2);
 
                     blue3curr=-1;
                     animateKillStatus=false;
@@ -8818,7 +8904,7 @@ function onDeviceReady() {
                 
              }else{
                 blue4.x=getXtoken(200+5);
-                blue4.y=getYtoken(240-18);
+                blue4.y=getYtoken(240-yOffseter2);
         
                 blue4curr=-1;
                 animateKillStatus=false;
@@ -9517,7 +9603,7 @@ function onDeviceReady() {
         
         //56 is home run.
     //    var arrDebug=[6,6,6,6,1,26,2,1,1,1,6,56,6,6,56,1,6,27,1,6,1,1,1,1,1];
-        // var arrDebug=[6,6,1,1,1,1,1,1,1,6,6,1,6,56,1,6,27,1,6,1,1,1,1,1];
+        // var arrDebug=[6,56,6,56,6,56,6,56,2,1,6,1,1,1,6,6,1,6,56,1,6,27,1,6,1,1,1,1,1];
 
         // diceNo= diceNo=arrDebug[debugcounter]; 
         // debugcounter++;
