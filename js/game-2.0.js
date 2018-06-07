@@ -235,7 +235,14 @@ var mainChain = function()
     {
         //return;
         // if(game.device.android)
-        jioSDK.showAd(jioSDK.myAdspotkey, jioSDK.myGameSource);
+        try{
+            jioSDK.showAd(jioSDK.myAdspotkey, jioSDK.myGameSource);
+
+        }
+        catch(error)
+        {
+            console.log("show ad error :"+error);
+        }
     }
 
     function showAds()
@@ -794,17 +801,20 @@ var mainChain = function()
          if(totalMultiElementsOnThisTile==0)
         {
             //One color is on same tile.
-            offsetSetterXred=-20; //-9
-            offsetSetterXredfactor=-3;
+            var color1=colorsOnTile[0];
+            // console.log("COLOR ON SAME TILE :"+color1);
+
+            offsetSetterXred=-9; //-9
+            offsetSetterXredfactor=-6;
 
             offsetSetterXyel=-9;
-            offsetSetterXyelfactor=-3;
+            offsetSetterXyelfactor=-6;
 
             offsetSetterXgreen=-9;
-            offsetSetterXgreenfactor=-3;
+            offsetSetterXgreenfactor=-6;
 
             offsetSetterXblue=-9;
-            offsetSetterXbluefactor=-3;
+            offsetSetterXbluefactor=-6;
 
 
 
@@ -1076,6 +1086,7 @@ var mainChain = function()
         if(redCounter>0)
         {
           
+            // console.log("HERE 1 !!");
             redOverLapping.sort(function(a, b){return b-a});
             for(var i=0; i<redOverLapping.length;i++)
              {
@@ -1084,6 +1095,8 @@ var mainChain = function()
              
                 if(token==1  && redAdjustedOnce.includes(token)==false)
                 {
+                    // console.log(" offseter x red 1.1:"+offsetSetterXred);
+
                     red1.x= (redNodeX[red1curr]+offsetSetterXred);
                     red1.y= (redNodeY[red1curr]-14+offsetSetterYred);
                    
@@ -1094,6 +1107,8 @@ var mainChain = function()
                 }
                 else if(token==2  && redAdjustedOnce.includes(token)==false)
                 {
+                    // console.log(" offseter x red 1.2:"+offsetSetterXred);
+
                     red2.x= ( redNodeX[red2curr]+offsetSetterXred);
                     red2.y= ( redNodeY[red2curr]-14+offsetSetterYred);
 
@@ -1104,6 +1119,8 @@ var mainChain = function()
                 }
                 else if(token==3  && redAdjustedOnce.includes(token)==false)
                 {
+                    // console.log(" offseter x red 1.3:"+offsetSetterXred);
+
                      red3.x= ( redNodeX[red3curr]+offsetSetterXred);
                      red3.y= ( redNodeY[red3curr]-14+offsetSetterYred);
 
@@ -1114,6 +1131,8 @@ var mainChain = function()
                 else if(token==4  && redAdjustedOnce.includes(token)==false)
                 {
  
+                    // console.log(" offseter x red 1.4:"+offsetSetterXred);
+
                     red4.x= (redNodeX[red4curr]+offsetSetterXred);
                     red4.y= (redNodeY[red4curr]-14+offsetSetterYred);
 
@@ -1127,14 +1146,17 @@ var mainChain = function()
         }
          else
         {
+            // console.log("HERE 2 !!");
 
             //console.log("HERE");
-            if(redAdjustedOnce.includes(1)==false && redOverLapping.includes(1)==false){
+            if(redAdjustedOnce.includes(1)==false && redOverLapping.includes(1)==false)
+            {
             if(red1curr>=0 && red1curr<=56)
             {
              
 
-               if(red1curr==0){
+               if(red1curr==0)
+               {
                 game.add.tween(red1).to( { x:redNodeX[red1curr] ,y: redNodeY[red1curr] }, 500, Phaser.Easing.Quadratic.Out,100);
                 game.add.tween(red1BlackCircle).to( { x:redNodeX[red1curr] ,y: redNodeY[red1curr] +40}, 500, Phaser.Easing.Quadratic.Out,100);
                 game.add.tween(red1Circle).to( { x:redNodeX[red1curr] ,y: redNodeY[red1curr] +40}, 500, Phaser.Easing.Quadratic.Out,100);
@@ -2345,6 +2367,7 @@ var mainChain = function()
         // game.stage.backgroundColor = '#1B2631';
         game.load.bitmapFont('myFont', 'font/font.png', 'font/font.fnt');
         game.load.image('panel','img/UI_panel.png');
+        game.load.image('playportrait','playportrait.jpg');
 
  
         game.load.image('red_dock','img/red_dock.png');
@@ -2379,7 +2402,7 @@ var mainChain = function()
         // game.load.image('inGame','img/Ludo_board_bg.png');
 
        game.load.image("//  // mainbg",'img/Ludo_board_bg.png'); //
-        game.load.image("titleBG",'img/Ludo_title.png');
+        game.load.image("titleBG",'img/Ludo_Title.png');
         game.load.image("titleCupBG",'img/cup.png');
 
 
@@ -2640,20 +2663,21 @@ var mainChain = function()
 
     var currAudioSrc=0;
 
-function initAudioSrc(){
- 
-    audioSrc1=game.add.audio('move');
- 
-    audioSrc2=game.add.audio('secured');
- 
-    audioSrc3=game.add.audio('kill');
- 
-    audioSrc4=game.add.audio('gameOver');
- 
-    audioSrc5=game.add.audio('diceRoll');
- 
-    audioSrc6= game.add.audio('six');
-}
+    function initAudioSrc()
+    {
+    
+        audioSrc1=game.add.audio('move');
+    
+        audioSrc2=game.add.audio('secured');
+    
+        audioSrc3=game.add.audio('kill');
+    
+        audioSrc4=game.add.audio('gameOver');
+    
+        audioSrc5=game.add.audio('diceRoll');
+    
+        audioSrc6= game.add.audio('six');
+    }
 
     function changeAudioSrc(type)
     {
@@ -2898,7 +2922,7 @@ function onDeviceReady() {
             }
             else{
                 gameModeType=2;
-         //      selectColorStatus=true;
+         //     selectColorStatus=true;
                 noOfPlayerBGActive(false);
              //   markerSelectActive(true)
              setColorPlayer(playerColor[0]);
@@ -2910,7 +2934,7 @@ function onDeviceReady() {
              boardBG.visible=true;
              inGameTitleBG.visible=true;
 
-             titleBG.visible=false;
+            titleBG.visible=false;
             titleCupBG.visible=false;
 
              gameStatus=true;
@@ -3024,7 +3048,27 @@ function onDeviceReady() {
 
     function create() 
     {
+        if(!game.device.desktop){
+        portrait=game.add.image(0, 0, 'playportrait');
+        portrait.alpha=0;
+        portrait.width=game.world.width;
+        portrait.height=game.world.height;
+        
+        game.scale.enterIncorrectOrientation.add(function(){
+        portrait.alpha=1;
+        game.paused=true;
+        gamePaused=true;
+        portrait.bringToTop();
+        });
 
+        game.scale.leaveIncorrectOrientation.add(function(){
+        portrait.alpha=0;
+        game.paused=false;
+        gamePaused=false;
+        });
+   
+        
+        
         // var cacheBG= game.cache.getImage('inGame'); 
        // game.stage.backgroundColor = "#4488AA";
 
@@ -3032,7 +3076,16 @@ function onDeviceReady() {
        //console.log(  document.getElementById("parentDiv").clientHeight);
         // inDifficultyBG=game.add.sprite(0,0,'inDifficulty');
        //game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL; 
+       game.scale.forceOrientation(false, true);
+    }
+
        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL; 
+
+       
+
+    //    game.scale.forceOrientation(false, true);
+    //    game.scale.enterIncorrectOrientation.add(handleIncorrect);
+    //     game.scale.leaveIncorrectOrientation.add(handleCorrect);
     //    game.stage.scale.pageAlignHorizontally = true;
     //    game.stage.scale.pageAlignVeritcally = true;
     //    game.stage.scale.refresh();
@@ -7455,12 +7508,13 @@ function onDeviceReady() {
     {
             if( color!=getColor())
             {
-            //    console.log("RETURNING FROM HERE");
+                // console.log("RETURNING FROM HERE ::"+color+"::Assigned color :"+getColor());
                 return;
             }
+
              if(getShouldRollDiceStatus()   && !getDiceRolledStatus())
               {
-                
+                // console.log("PLAYING HIS MOVE AS WELL");
                 //if(key==13 || key==53)
                 {    
                     receivedInputFromMP("1","DICE ROLL");
@@ -7475,6 +7529,10 @@ function onDeviceReady() {
                 //     return;
                 // }
                   
+                }
+                else
+                {
+                    // console.log("SHOULD ROLL DICE STATUS "+ getShouldRollDiceStatus() +"::"+"DICE ROLL STATUS :"+getDiceRolledStatus());
                 }
 
 
@@ -7653,54 +7711,74 @@ function onDeviceReady() {
 
 
     var animAngle=0;
+
+    var markerAnimationRed=[];
+    var markerAnimationYellow=[];
+    var markerAnimationGreen=[];
+    var markerAnimationBlue=[];
+
+
     function animateMarker(_set, _index, dt)
     {
-      /*  if(animAngle >= 360)
+        /*if(animAngle >= 360)
         animAngle = 0;
         else*/
-        animAngle += dt*10;
 
-        animVal1 = Math.sin(animAngle)*0.09;
-        animVal2 = Math.sin(animAngle)*0.09;
-        animVal3 = Math.sin(animAngle)*0.09;
-        animVal4 = Math.sin(animAngle)*0.09;
+        // animAngle += dt*10;
+
+        // animVal1 = Math.sin(animAngle)*0.09;
+        // animVal2 = Math.sin(animAngle)*0.09;
+        // animVal3 = Math.sin(animAngle)*0.09;
+        // animVal4 = Math.sin(animAngle)*0.09;
+
+        
+        
+
 
         if(_set == 1)//RED
         {
             if(_index == 1)
             {
-                red1.y += getYtoken( animVal1);
+                markerAnimationRed[0]= Math.sin(dt*10)*0.09;
+                red1.y += getYtoken(markerAnimationRed[0]);
             }
             if(_index == 2)
             {
-                red2.y +=getYtoken(  animVal2);
+                markerAnimationRed[1]= Math.sin(dt*10)*0.09;
+                red2.y += getYtoken(markerAnimationRed[1]);
             }
             if(_index == 3)
             {
-                red3.y += getYtoken( animVal3);
+                markerAnimationRed[2]= Math.sin(dt*10)*0.09;
+                red3.y += getYtoken(markerAnimationRed[2]);
             }
             if(_index == 4)
             {
-                red4.y += getYtoken( animVal4);
+                markerAnimationRed[3]= Math.sin(dt*10)*0.09;
+                red4.y += getYtoken(markerAnimationRed[3]);
             }
         }
         if(_set == 2)//YELLOW
         {
             if(_index == 1)
             {
-                yellow1.y +=getYtoken(  animVal1);
+                markerAnimationYellow[0]= Math.sin(dt*10)*0.09;
+                yellow1.y +=getYtoken(  markerAnimationYellow[0]);
             }
             if(_index == 2)
             {
-                yellow2.y += getYtoken( animVal2);
+                markerAnimationYellow[1]= Math.sin(dt*10)*0.09;
+                yellow2.y += getYtoken( markerAnimationYellow[1]);
             }
             if(_index == 3)
             {
-                yellow3.y += getYtoken( animVal3);
+                markerAnimationYellow[2]= Math.sin(dt*10)*0.09;
+                yellow3.y += getYtoken( markerAnimationYellow[2]);
             }
             if(_index == 4)
             {
-                yellow4.y += getYtoken( animVal4);
+                markerAnimationYellow[3]= Math.sin(dt*10)*0.09;
+                yellow4.y += getYtoken( markerAnimationYellow[3]);
             }
             
         }
@@ -7708,38 +7786,48 @@ function onDeviceReady() {
         {
             if(_index == 1)
             {
-                green1.y += getYtoken( animVal1);
+                markerAnimationGreen[0]= Math.sin(dt*10)*0.09;
+                green1.y += getYtoken( markerAnimationGreen[0]);
             }
             if(_index == 2)
             {
-                green2.y += getYtoken(animVal2);
+                markerAnimationGreen[1]= Math.sin(dt*10)*0.09;
+                green2.y += getYtoken(markerAnimationGreen[1]);
             }
             if(_index == 3)
             {
-                green3.y += getYtoken(animVal3);
+                markerAnimationGreen[2]= Math.sin(dt*10)*0.09;
+                green3.y += getYtoken(markerAnimationGreen[2]);
             }
             if(_index == 4)
             {
-                green4.y += getYtoken(animVal4);
+                markerAnimationGreen[3]= Math.sin(dt*10)*0.09;
+                green4.y += getYtoken(markerAnimationGreen[3]);
             }
         }
         if(_set == 4)//BLUE
         {
             if(_index == 1)
             {
-                blue1.y += getYtoken(animVal1);
+                markerAnimationBlue[0]= Math.sin(dt*10)*0.09;
+                blue1.y += getYtoken(markerAnimationBlue[0]);
             }
             if(_index == 2)
             {
-                blue2.y +=getYtoken( animVal2);
+                markerAnimationBlue[1]= Math.sin(dt*10)*0.09;
+                blue2.y +=getYtoken( markerAnimationBlue[1]);
             }
             if(_index == 3)
             {
-                blue3.y += getYtoken(animVal3);
+                markerAnimationBlue[2]= Math.sin(dt*10)*0.09;
+
+                blue3.y += getYtoken(markerAnimationBlue[2]);
             }
             if(_index == 4)
             {
-                blue4.y += getYtoken(animVal4);
+                markerAnimationBlue[3]= Math.sin(dt*10)*0.09;
+
+                blue4.y += getYtoken(markerAnimationBlue[3]);
             }
         }
     } 
@@ -7769,16 +7857,36 @@ function onDeviceReady() {
         //textDiceObj.text=" ";
         var _val = 150;
 
+        if(animColorAngle >= 360)
+        animColorAngle = 0;
+        else 
+        animColorAngle += dt*5;
+
+        animColor += Math.sin(animColorAngle)*3.2; 
+
+
+
+
+        var _totalVal=_val+animColor;
+
+        if(_totalVal>255)
+         _totalVal=_val;
+
+
         if(color == 1)
         {
         
             if(redFlashBG.visible==false)
              redFlashBG.visible=true;
 
-           
 
-             redFlashBG.tint=rgbToHex(_val+animColor,0,0); 
+            //  if((_val+animColor)>255 )
+
+
+             redFlashBG.tint=rgbToHex(_totalVal,0,0); 
               
+
+            //  console.log("COLOR VAL:"+(_totalVal));
 
         }
         if(color == 2)
@@ -7787,7 +7895,7 @@ function onDeviceReady() {
             yellowFlashBG.visible=true;
       
     
-          yellowFlashBG.tint=rgbToHex(_val+animColor,_val+animColor,0);
+          yellowFlashBG.tint=rgbToHex(_totalVal,_totalVal,0);
 
         }
         if(color == 3)
@@ -7795,24 +7903,19 @@ function onDeviceReady() {
             if(greenFlashBG.visible==false)
             greenFlashBG.visible=true;
           
-             greenFlashBG.tint=rgbToHex (0,_val+animColor,0);
+             greenFlashBG.tint=rgbToHex (0,_totalVal,0);
         }
         if(color == 4)
         {
             if(blueFlashBG.visible==false)
             blueFlashBG.visible=true;
           
-            blueFlashBG.tint=rgbToHex(0,0,_val+animColor);
+            blueFlashBG.tint=rgbToHex(0,0,_totalVal);
         }
  
        
 
-        /*if(animColorAngle >= 360)
-        animColorAngle = 0;
-        else*/
-        animColorAngle += dt*5;
-
-        animColor += Math.sin(animColorAngle)*3.2; 
+      
 
        //console.log(""+animColor);
     } 
@@ -9414,41 +9517,41 @@ function onDeviceReady() {
         
         //56 is home run.
     //    var arrDebug=[6,6,6,6,1,26,2,1,1,1,6,56,6,6,56,1,6,27,1,6,1,1,1,1,1];
-    //     //var arrDebug=[6,5,6,6,25,6,1,1,1,6,6,1,6,56,1,6,27,1,6,1,1,1,1,1];
+        // var arrDebug=[6,6,1,1,1,1,1,1,1,6,6,1,6,56,1,6,27,1,6,1,1,1,1,1];
 
-    //     diceNo= diceNo=arrDebug[debugcounter]; 
-    //     debugcounter++;
-    //     resetDiceSprites();
-    //     if(diceNo==1)
-    //     {
-    //         diceDot1.visible=true;
-    //     }
-    //     else if(diceNo==2)
-    //     {
-    //         diceDot2.visible=true;
-    //     }
-    //     else if(diceNo==3)
-    //     {
-    //         diceDot3.visible=true;
-    //     }
-    //     else if(diceNo==4)
-    //     {
-    //         diceDot4.visible=true;
-    //     }
-    //     else if(diceNo==5)
-    //     {
-    //         diceDot5.visible=true;
-    //     }
-    //     else if(diceNo==6)
-    //     {
-    //         diceDot6.visible=true;
-    //     }
-    //     if(diceNo>=6)
-    //     {
-    //         changeAudioSrc(5);
-    //         repeatMove=true;
-    //     }
-    //     return;         
+        // diceNo= diceNo=arrDebug[debugcounter]; 
+        // debugcounter++;
+        // resetDiceSprites();
+        // if(diceNo==1)
+        // {
+        //     diceDot1.visible=true;
+        // }
+        // else if(diceNo==2)
+        // {
+        //     diceDot2.visible=true;
+        // }
+        // else if(diceNo==3)
+        // {
+        //     diceDot3.visible=true;
+        // }
+        // else if(diceNo==4)
+        // {
+        //     diceDot4.visible=true;
+        // }
+        // else if(diceNo==5)
+        // {
+        //     diceDot5.visible=true;
+        // }
+        // else if(diceNo==6)
+        // {
+        //     diceDot6.visible=true;
+        // }
+        // if(diceNo>=6)
+        // {
+        //     changeAudioSrc(5);
+        //     repeatMove=true;
+        // }
+        // return;         
   
        /* var aiDebug=[6,6,24,2,51,5,6,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
 
@@ -12186,7 +12289,7 @@ var testCtr=0;
 
         }
 
-      //  debugbadges();
+        // debugbadges();
 
         if(gameOverStatus)
         {
@@ -12376,6 +12479,17 @@ var testCtr=0;
         showButtons();
     }
 
+    function handleIncorrect(){
+        if(!game.device.desktop){
+            document.getElementById("turn").style.display="block";
+        }
+   }
+   
+   function handleCorrect(){
+       if(!game.device.desktop){
+           document.getElementById("turn").style.display="none";
+       }
+   }
 
 
 };
